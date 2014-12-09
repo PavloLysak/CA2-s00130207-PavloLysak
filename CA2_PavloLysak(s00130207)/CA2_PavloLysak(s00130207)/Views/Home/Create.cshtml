@@ -1,0 +1,45 @@
+﻿@model CA2_PavloLysak_s00130207_.Models.Movie
+<div class="container">
+    <!-- Jumbotron -->
+    <div class="jumbotron" style="margin-top: 15px">
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    
+        <h2>Add new movie to database:</h2>
+
+    <div class="table">
+
+        <div class="col-xs-8">
+            @Html.LabelFor(model => model.MovieName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieName)
+            @Html.ValidationMessageFor(model => model.MovieName)
+        </div>
+
+        <div class="col-xs-8">
+            @Html.LabelFor(model => model.MovieReleaseDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieReleaseDate)
+            @Html.ValidationMessageFor(model => model.MovieReleaseDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+        </div>
+    </div>
+

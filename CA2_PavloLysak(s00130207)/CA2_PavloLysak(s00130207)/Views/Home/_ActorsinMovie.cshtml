@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CA2_PavloLysak_s00130207_.Models.Actor>
+
+@if (Model.Any())
+{
+    <table id="ActorTable" class="table">
+        <tr>
+            <th>
+                @ViewBag.movieName
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActorName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ActorId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ActorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ActorId })
+                </td>
+            </tr>
+            }
+        }
+
+    </table>
+}
+else
+{<div><strong><mark>No Children registered for @ViewBag.movieName</mark></strong></div>}

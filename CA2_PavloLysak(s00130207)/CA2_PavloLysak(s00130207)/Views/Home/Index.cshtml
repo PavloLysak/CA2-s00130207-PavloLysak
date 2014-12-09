@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CA2_PavloLysak_s00130207_.Models.Movie>
+
+<div class="container">
+    <!-- Jumbotron -->
+    <div class="jumbotron" style="margin-top: 15px">
+        <h2>List of Movies</h2>
+
+    </div>
+        <div class="col-xs-8">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieName)
+                </th>
+                <th>
+                    @Html.ActionLink("Release Date", null, new{sortOrder=@ViewBag.dateOrder})
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieReleaseDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="btn btn-xs btn-warning" 
+                                  onclick="ActorstoDisplay('@item.MovieId')">@Html.DisplayFor(modelItem => item.MovieName)</span>
+                        @*@Html.DisplayFor(modelItem => item.MovieName)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieReleaseDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.MovieId }) 
+                    </td>
+                </tr>
+            }
+        </table>
+            </div>
+    
+    <div class="col-xs-4">
+            <div id="Detail"></div>
+        </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            toastr.info('CA2 by Pavlo Lysak');
+        });
+
+        $(function () { });
+        function ActorstoDisplay(movieId) {
+          
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ActorPV")',
+                data: { id: movieId },
+                success: function (data) {
+                    $('#Detail').hide();
+                    
+                    $('#Detail').html(data);
+                    $('#Detail').fadeIn("slow");
+                    ;
+                },
+                error: function (data) {
+                    $('#Detail').html('<h3>Error in retrieval</h3>');
+                }
+
+
+            });
+
+            
+        }
+        </script>
+        
+    }
+
+
+
